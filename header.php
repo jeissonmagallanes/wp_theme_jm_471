@@ -7,7 +7,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package WordPress
- * @subpackage Twenty_Seventeen
+ * @subpackage JM
  * @since 1.0
  * @version 1.0
  */
@@ -22,7 +22,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php cultura_body_tag_schema(); ?> <?php body_class(); ?>>
+<body <?php jm_body_tag_schema(); ?> <?php body_class(); ?>>
 <div id="page" class="site">
 
 	<header itemscope itemtype="http://schema.org/WPHeader" id="masthead" class="site-header">
