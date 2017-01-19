@@ -1071,6 +1071,11 @@ body {
 }
 
 /**----------------- Regular Content -----------------**/
+.container{
+	margin: auto;
+	position: relative;
+	width: 98%;
+}
 .site-content {
 	position: relative;
 }

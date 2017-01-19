@@ -88,15 +88,16 @@ function jm_fonts_url() {
 	$fonts_url = '';
 	$font_families = array();
 
-	$font_families[] = 'Noto Sans:400,700';
+	//$font_families[] = 'Noto Sans:400,700';
 
-	$query_args = array(
-		'family' => urlencode( implode( '|', $font_families ) ),
-		'subset' => urlencode( 'latin,latin-ext' ),
-	);
+	if( count( $font_families ) > 0 ){
+		$query_args = array(
+			'family' => urlencode( implode( '|', $font_families ) ),
+			'subset' => urlencode( 'latin,latin-ext' ),
+		);
 
-	$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-
+		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+	}
 	return esc_url_raw( $fonts_url );
 }
 
@@ -161,6 +162,11 @@ function jm_scripts() {
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'jm-fonts', jm_fonts_url(), array(), null );
 
+	wp_enqueue_style( 'jm-fontsawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+
+	//Load Menu Responsive CSS
+	wp_enqueue_style( 'jm-menu', get_theme_file_uri( '/assets/css/jquery.mmenu.all.css' ) );
+
 	// Theme stylesheet.
 	wp_enqueue_style( 'jm-style', get_stylesheet_uri() );
 
@@ -168,6 +174,8 @@ function jm_scripts() {
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
+	//Load Menu Responsive JS
+	wp_enqueue_script( 'jm-menu', get_theme_file_uri( '/assets/js/jquery.mmenu.all.min.js' ), array( 'jquery' ), '5.7.8', true );
 
 	wp_enqueue_script( 'jm-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
 
@@ -286,14 +294,6 @@ function jm_add_excerpt_support_for_pages() {
 }
 add_action( 'init', 'jm_add_excerpt_support_for_pages' );
 
-/**
- * Function Add Icon Font
- */
-function jm_add_icon_fonts() {
-	wp_register_style( 'FontsAwesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    wp_enqueue_style( 'FontsAwesome' ); 
-}
-add_action( 'wp_print_styles', 'jm_add_icon_fonts' );
 
 /**
  * Enqueue Schema org inline scripts
